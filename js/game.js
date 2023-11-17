@@ -21,7 +21,15 @@ const start = () => {
   loader.style.display = "none";
   container.style.display = "block";
 };
-const checkAnswer = () => {};
+const checkAnswer = (event, index) => {
+  const isCorrect = index === correctAnswer ? true : false;
+  if (isCorrect) {
+    event.target.classList.add("correct");
+  } else {
+    event.target.classList.add("incorrect");
+    answerList[correctAnswer].classList.add("correct");
+  }
+};
 const showQuestion = () => {
   const { question, answers, correctAnswerIndex } =
     formattedData[questionIndex];
@@ -33,5 +41,5 @@ const showQuestion = () => {
 };
 window.addEventListener("load", fetchData);
 answerList.forEach((button, index) => {
-  button.addEventListener("click", checkAnswer);
+  button.addEventListener("click", (event) => checkAnswer(event, index));
 });
